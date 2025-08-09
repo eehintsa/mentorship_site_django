@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}{{ student.name }}{% endblock %}
+{% block content %}
+  <div class="row g-4 align-items-center">
+    <div class="col-12 col-md-4">
+      <img src="{{ student.photo_url|default:'/static/img/placeholder.jpg' }}" class="img-fluid rounded shadow" alt="{{ student.name }}" onerror="this.src='/static/img/placeholder.jpg'">
+    </div>
+    <div class="col-12 col-md-8">
+      <h1 class="h3">{{ student.name }}</h1>
+      <p class="text-muted">{{ student.program }}{% if student.university %} · {{ student.university }}{% endif %}</p>
+      <p>{{ student.bio|linebreaks }}</p>
+      {% if student.profile_url %}
+        <a class="btn btn-outline-primary" href="{{ student.profile_url }}" target="_blank" rel="noopener">Profile</a>
+      {% endif %}
+      <a class="btn btn-secondary" href="{% url 'students:list' %}">Back to all students</a>
+    </div>
+  </div>
+{% endblock %}
